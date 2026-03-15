@@ -1,0 +1,267 @@
+```html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>新潟県行政情報掲示板</title>
+
+<style>
+
+body{
+margin:0;
+font-family:
+"Yu Mincho",
+"MS Mincho",
+serif;
+background:#f3efe4;
+}
+
+header{
+background:#e5e0d5;
+border-bottom:3px double #333;
+padding:12px;
+font-size:24px;
+}
+
+.container{
+display:flex;
+height:92vh;
+}
+
+.menu{
+width:360px;
+background:#faf7ef;
+border-right:2px solid #777;
+overflow:auto;
+padding:10px;
+}
+
+.menu ul{
+list-style:none;
+padding-left:15px;
+}
+
+.menu li{
+padding:4px;
+cursor:pointer;
+border-bottom:1px dotted #aaa;
+}
+
+.menu li:hover{
+background:#eee7d6;
+}
+
+.toggle{
+font-weight:bold;
+cursor:pointer;
+margin-top:8px;
+}
+
+.content{
+flex:1;
+padding:15px;
+background:white;
+overflow:auto;
+}
+
+.news{
+padding:8px;
+border-bottom:1px dotted #999;
+}
+
+.news a{
+color:#003399;
+text-decoration:underline;
+}
+
+.date{
+font-size:12px;
+color:#555;
+}
+
+.new{
+background:red;
+color:white;
+font-size:10px;
+padding:2px 4px;
+margin-left:6px;
+}
+
+.hidden{
+display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+[ロゴ] 新潟県行政情報掲示板
+</header>
+
+<div class="container">
+
+<div class="menu">
+
+<b>新潟県</b>
+
+<div class="toggle" onclick="toggle('municipal')">・∟ 市町村区</div>
+
+<ul id="municipal">
+
+<li onclick="toggle('niigata')">新潟市</li>
+
+<ul id="niigata">
+
+<li onclick="loadRSS(rss.niigata)">中央区</li>
+<li onclick="loadRSS(rss.niigata)">北区</li>
+<li onclick="loadRSS(rss.niigata)">東区</li>
+<li onclick="loadRSS(rss.niigata)">江南区</li>
+<li onclick="loadRSS(rss.niigata)">秋葉区</li>
+<li onclick="loadRSS(rss.niigata)">南区</li>
+<li onclick="loadRSS(rss.niigata)">西区</li>
+<li onclick="loadRSS(rss.niigata)">西蒲区</li>
+
+</ul>
+
+<li onclick="loadRSS(rss.nagaoka)">長岡市</li>
+<li onclick="loadRSS(rss.sanjo)">三条市</li>
+<li onclick="loadRSS(rss.kashiwazaki)">柏崎市</li>
+<li onclick="loadRSS(rss.shibata)">新発田市</li>
+<li onclick="loadRSS(rss.ojiya)">小千谷市</li>
+<li onclick="loadRSS(rss.kamo)">加茂市</li>
+<li onclick="loadRSS(rss.tokamachi)">十日町市</li>
+<li onclick="loadRSS(rss.mitsuke)">見附市</li>
+<li onclick="loadRSS(rss.murakami)">村上市</li>
+<li onclick="loadRSS(rss.tsubame)">燕市</li>
+<li onclick="loadRSS(rss.itoigawa)">糸魚川市</li>
+<li onclick="loadRSS(rss.myoko)">妙高市</li>
+<li onclick="loadRSS(rss.gosen)">五泉市</li>
+<li onclick="loadRSS(rss.joetsu)">上越市</li>
+<li onclick="loadRSS(rss.agano)">阿賀野市</li>
+<li onclick="loadRSS(rss.sado)">佐渡市</li>
+<li onclick="loadRSS(rss.uonuma)">魚沼市</li>
+<li onclick="loadRSS(rss.minamiuonuma)">南魚沼市</li>
+<li onclick="loadRSS(rss.tainai)">胎内市</li>
+<li onclick="loadRSS(rss.seiro)">聖籠町</li>
+<li onclick="loadRSS(rss.yahiko)">弥彦村</li>
+<li onclick="loadRSS(rss.tagami)">田上町</li>
+<li onclick="loadRSS(rss.aga)">阿賀町</li>
+<li onclick="loadRSS(rss.izumozaki)">出雲崎町</li>
+<li onclick="loadRSS(rss.yuzawa)">湯沢町</li>
+<li onclick="loadRSS(rss.tsunan)">津南町</li>
+
+</ul>
+
+
+<div class="toggle" onclick="toggle('pref')">・∟ 新潟県</div>
+
+<ul id="pref">
+
+<li onclick="toggle('pref_office')">∟ 県庁</li>
+
+<ul id="pref_office">
+
+<li onclick="loadRSS(rss.pref_all)">全情報</li>
+<li onclick="loadRSS(rss.pref_press)">報道発表資料</li>
+<li onclick="loadRSS(rss.pref_bid)">入札・発注・売却</li>
+<li onclick="loadRSS(rss.pref_event)">イベント</li>
+<li onclick="loadRSS(rss.pref_recruit)">採用・試験・募集</li>
+
+</ul>
+
+<li onclick="toggle('pref_disaster')">∟ 防災</li>
+
+<ul id="pref_disaster">
+
+<li onclick="loadRSS(rss.disaster)">緊急情報</li>
+<li onclick="loadRSS(rss.disaster)">各種防災情報</li>
+
+</ul>
+
+</ul>
+
+</div>
+
+<div class="content" id="content">
+表示部
+</div>
+
+</div>
+
+<script>
+
+const rss={
+
+pref_all:"https://www.pref.niigata.lg.jp/site/rss.xml",
+pref_press:"https://www.pref.niigata.lg.jp/site/houdou/rss.xml",
+pref_bid:"https://www.pref.niigata.lg.jp/site/nyusatsu/rss.xml",
+pref_event:"https://www.pref.niigata.lg.jp/site/event/rss.xml",
+pref_recruit:"https://www.pref.niigata.lg.jp/site/saiyou/rss.xml",
+
+disaster:"https://www.pref.niigata.lg.jp/site/bosai/rss.xml",
+
+niigata:"https://www.city.niigata.lg.jp/rss.xml",
+nagaoka:"https://www.city.nagaoka.niigata.jp/rss.xml",
+sanjo:"https://www.city.sanjo.niigata.jp/rss.xml",
+kashiwazaki:"https://www.city.kashiwazaki.lg.jp/rss.xml",
+shibata:"https://www.city.shibata.lg.jp/rss.xml"
+
+};
+
+function toggle(id){
+
+const el=document.getElementById(id);
+
+if(el.classList.contains("hidden")){
+el.classList.remove("hidden");
+}else{
+el.classList.add("hidden");
+}
+
+}
+
+async function loadRSS(url){
+
+if(!url){
+document.getElementById("content").innerHTML="RSS未設定";
+return;
+}
+
+const api="https://api.rss2json.com/v1/api.json?rss_url="+url;
+
+const res=await fetch(api);
+const data=await res.json();
+
+let html="";
+
+data.items.forEach(item=>{
+
+const d=new Date(item.pubDate);
+const now=new Date();
+const diff=(now-d)/(1000*60*60*24);
+
+const isNew=diff<3;
+
+html+=`
+<div class="news">
+<a href="${item.link}" target="_blank">
+${item.title}
+${isNew?'<span class="new">NEW</span>':''}
+</a>
+<div class="date">${item.pubDate}</div>
+</div>
+`;
+
+});
+
+document.getElementById("content").innerHTML=html;
+
+}
+
+</script>
+
+</body>
+</html>
+```
