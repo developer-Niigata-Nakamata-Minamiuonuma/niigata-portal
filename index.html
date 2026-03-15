@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -10,17 +10,18 @@
 body{
 margin:0;
 font-family:
-"Yu Mincho",
-"MS Mincho",
-serif;
+"MS Gothic",
+"MS PGothic",
+monospace;
 background:#f3efe4;
+font-size:14px;
 }
 
 header{
 background:#e5e0d5;
 border-bottom:3px double #333;
 padding:12px;
-font-size:24px;
+font-size:22px;
 }
 
 .container{
@@ -144,16 +145,20 @@ display:none;
 <li onclick="loadRSS(rss.uonuma)">魚沼市</li>
 <li onclick="loadRSS(rss.minamiuonuma)">南魚沼市</li>
 <li onclick="loadRSS(rss.tainai)">胎内市</li>
+
 <li onclick="loadRSS(rss.seiro)">聖籠町</li>
-<li onclick="loadRSS(rss.yahiko)">弥彦村</li>
 <li onclick="loadRSS(rss.tagami)">田上町</li>
 <li onclick="loadRSS(rss.aga)">阿賀町</li>
 <li onclick="loadRSS(rss.izumozaki)">出雲崎町</li>
 <li onclick="loadRSS(rss.yuzawa)">湯沢町</li>
 <li onclick="loadRSS(rss.tsunan)">津南町</li>
 
-</ul>
+<li onclick="loadRSS(rss.yahiko)">弥彦村</li>
+<li onclick="loadRSS(rss.kariwa)">刈羽村</li>
+<li onclick="loadRSS(rss.sekikawa)">関川村</li>
+<li onclick="loadRSS(rss.awashima)">粟島浦村</li>
 
+</ul>
 
 <div class="toggle" onclick="toggle('pref')">・∟ 新潟県</div>
 
@@ -199,27 +204,47 @@ pref_press:"https://www.pref.niigata.lg.jp/site/houdou/rss.xml",
 pref_bid:"https://www.pref.niigata.lg.jp/site/nyusatsu/rss.xml",
 pref_event:"https://www.pref.niigata.lg.jp/site/event/rss.xml",
 pref_recruit:"https://www.pref.niigata.lg.jp/site/saiyou/rss.xml",
-
 disaster:"https://www.pref.niigata.lg.jp/site/bosai/rss.xml",
 
 niigata:"https://www.city.niigata.lg.jp/rss.xml",
 nagaoka:"https://www.city.nagaoka.niigata.jp/rss.xml",
 sanjo:"https://www.city.sanjo.niigata.jp/rss.xml",
 kashiwazaki:"https://www.city.kashiwazaki.lg.jp/rss.xml",
-shibata:"https://www.city.shibata.lg.jp/rss.xml"
+shibata:"https://www.city.shibata.lg.jp/rss.xml",
+
+ojiya:"",
+kamo:"",
+tokamachi:"",
+mitsuke:"",
+murakami:"",
+tsubame:"",
+itoigawa:"",
+myoko:"",
+gosen:"",
+joetsu:"",
+agano:"",
+sado:"",
+uonuma:"",
+minamiuonuma:"",
+tainai:"",
+
+seiro:"",
+tagami:"",
+aga:"",
+izumozaki:"",
+yuzawa:"",
+tsunan:"",
+
+yahiko:"",
+kariwa:"",
+sekikawa:"",
+awashima:""
 
 };
 
 function toggle(id){
-
 const el=document.getElementById(id);
-
-if(el.classList.contains("hidden")){
-el.classList.remove("hidden");
-}else{
-el.classList.add("hidden");
-}
-
+el.classList.toggle("hidden");
 }
 
 async function loadRSS(url){
@@ -264,4 +289,4 @@ document.getElementById("content").innerHTML=html;
 
 </body>
 </html>
-
+```
