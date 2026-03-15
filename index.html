@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -181,7 +181,7 @@ display:none;
 <ul id="pref_disaster">
 
 <li onclick="loadRSS(rss.disaster)">緊急情報</li>
-<li onclick="loadRSS(rss.disaster)">各種防災情報</li>
+<li onclick="loadRSS(rss.bousai)">各種防災情報</li>
 
 </ul>
 
@@ -199,12 +199,13 @@ display:none;
 
 const rss={
 
-pref_all:"https://www.pref.niigata.lg.jp/site/rss.xml",
+pref_all:"https://www.pref.niigata.lg.jp/rss/10/list1.xml",
 pref_press:"https://www.pref.niigata.lg.jp/site/houdou/rss.xml",
-pref_bid:"https://www.pref.niigata.lg.jp/site/nyusatsu/rss.xml",
-pref_event:"https://www.pref.niigata.lg.jp/site/event/rss.xml",
-pref_recruit:"https://www.pref.niigata.lg.jp/site/saiyou/rss.xml",
-disaster:"https://www.pref.niigata.lg.jp/site/bosai/rss.xml",
+pref_bid:"https://www.pref.niigata.lg.jp/rss/10/sub8.xml",
+pref_event:"https://www.pref.niigata.lg.jp/rss/10/sub2.xml",
+pref_recruit:"https://www.pref.niigata.lg.jp/rss/10/list7.xml",
+disaster:"https://www.bousai.pref.niigata.jp/contents/news.rss",
+bousai:"https://www.bousai.pref.niigata.jp/contents/bousai.rss",
 
 niigata:"https://www.city.niigata.lg.jp/rss.xml",
 nagaoka:"https://www.city.nagaoka.niigata.jp/rss.xml",
@@ -289,4 +290,4 @@ document.getElementById("content").innerHTML=html;
 
 </body>
 </html>
-```
+
